@@ -8,3 +8,4 @@ CREATE TABLE IF NOT EXISTS users (
  gender      ENUM('男','女','秘密') NOT NULL,
  age         ENUM('10代', '20代', '30代', '40代', '50代', '60代以上') NOT NULL
 );
+
