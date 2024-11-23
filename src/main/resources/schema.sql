@@ -9,3 +9,7 @@ CREATE TABLE IF NOT EXISTS users (
  age         ENUM('10代', '20代', '30代', '40代', '50代', '60代以上') NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS spot(
+ id BIGINT AUTO_INCREMENT PRIMARY KEY,
+ spot_name VARCHAR(255) NOT NULL UNIQUE
+);
