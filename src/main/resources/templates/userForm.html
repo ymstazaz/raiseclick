@@ -5,18 +5,62 @@
     <title>ユーザー新規登録</title>
 </head>
 <body>
+<header>
+    <a th:href="@{/}">RaseClick</a>
+</header>
 
-<form th:action="@{/users}" th:method="post" th:object="${userForm}">
-    <input type="text" th:field="*{name}">
-    <input type="text" th:field="*{address}">
-    <input type="text" th:field="*{password}">
-    <input type="text" th:field="*{prefecture}">
-    <input type="text" th:field="*{city}">
-    <input type="text" th:field="*{gender}">
-    <input type="text" th:field="*{age}">
-    <button type="submit">登録</button>
+<div class="page-title">
+    <h1>新規ユーザー登録画面</h1>
+</div>
 
-</form>
+<div class="form">
+    <form th:action="@{/users}" th:method="post" th:object="${userForm}">
+        <div class="user_name">
+            <input type="text" th:field="*{name}" placeholder="名前を入力してください">
+        </div>
+        <div class="user_address">
+            <input type="text" th:field="*{address}" placeholder="メールアドレスを入力してください">
+        </div>
+        <div class="user_password">
+            <input type="text" th:field="*{password}" placeholder="パスワードを英数ミックスで入力してください">
+        </div>
+        <div class="user_prefecture">
+            <select id="prefecture" th:field="*{prefecture}" required="required">
+                <option value="">選択してください</option>
+                <option th:each="prefecture : ${prefectures}"
+                        th:value="${prefecture}"
+                        th:text="${prefecture}">
+                </option>
+            </select>
+        </div>
+        <div class="user_city">
+            <input type="text" th:field="*{city}" placeholder="お住まいの市区を入力してください">
+        </div>
+        <div class="user_gender">
+            <select id="gender" th:field="*{gender}" required="required">
+                <option value="">選択してください</option>
+                <option value="男">男</option>
+                <option value="女">女</option>
+                <option value="秘密">秘密</option>
+            </select>
+        </div>
+        <div class="user_age">
+            <select id="age" th:field="*{age}" required="required">
+                <option value="">選択してください</option>
+                <option value="10代">10代</option>
+                <option value="20代">20代</option>
+                <option value="30代">30代</option>
+                <option value="40代">40代</option>
+                <option value="50代">50代</option>
+                <option value="60代以上">60代以上</option>
+            </select>
+        </div>
+        <div class="user_submit">
+            <button type="submit">登録</button>
+        </div>
+    </form>
+</div>
+
 
 </body>
 </html>
