@@ -8,11 +8,11 @@ public class SpotService {
     @Autowired
     private SpotRepository spotRepository;
     public Long findOrCreateSpot(String spotName){
-        Spot spot =spotRepository.findeBySpotName(spotName);
+        Spot spot =spotRepository.findBySpotName(spotName);
         if (spot == null){
             spot = new Spot();
             spot.setSpotName(spotName);
-            spot = spotRepository.save(spot);
+            spotRepository.insertSpot(spot);
         }
         return spot.getId();
     }
