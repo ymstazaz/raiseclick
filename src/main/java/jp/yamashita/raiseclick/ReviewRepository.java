@@ -2,7 +2,7 @@ package jp.yamashita.raiseclick;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.web.multipart.MultipartFile;
+
 
 @Mapper
 public interface ReviewRepository {

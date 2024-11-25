@@ -46,7 +46,6 @@ public class ReviewController {
                     spotId
             );
         } catch (Exception e) {
-            e.printStackTrace();
             throw new Exception("レビュー登録に失敗しました: " + e.getMessage(), e);
         }
         return "redirect:/";
