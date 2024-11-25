@@ -6,7 +6,7 @@
 </head>
 <body>
 <header>
-    <a th:href="@{/}">RaseClick</a>
+    <a th:href="@{/}">RaiseClick</a>
 </header>
 
 <div class="page-title">
@@ -17,6 +17,42 @@
     <form th:action="@{/reviewForm}" th:method="post" th:object="${reviewForm}">
         <div class="spot_name">
             <input type="text" th:field="*{spotName}" id="spotName" required placeholder="訪問先を入力してください">
+        </div>
+        <div class="situation">
+            <select id="situation" th:field="*{situation}" required>
+                <option value="">選択してください</option>
+                <option value="一人旅">一人旅</option>
+                <option value="恋人旅行">恋人旅行</option>
+                <option value="家族旅行（未就学児）">家族旅行（未就学児）</option>
+                <option value="家族旅行">家族旅行</option>
+                <option value="母子旅行">母子旅行</option>
+                <option value="父子旅行">父子旅行</option>
+                <option value="ドライブ">ドライブ</option>
+                <option value="日帰り旅行">日帰り旅行</option>
+                <option value="その他">その他</option>
+            </select>
+        </div>
+        <div class="review_age">
+            <select id="reviewAge" th:field="*{reviewAge}" required>
+                <option value="">選択してください</option>
+                <option value="10代">10代</option>
+                <option value="20代">20代</option>
+                <option value="30代">30代</option>
+                <option value="40代">40代</option>
+                <option value="50代">50代</option>
+                <option value="60代以上">60代以上</option>
+            </select>
+        </div>
+        <div class="review_gender">
+            <select id="reviewGender" th:field="*{reviewGender}" required>
+                <option value="">選択してください</option>
+                <option value="男">男</option>
+                <option value="女">女</option>
+                <option value="秘密">秘密</option>
+            </select>
+        </div>
+        <div class="free_comment">
+            <input type="text" th:field="*{freeComment}" id="freeComment" placeholder="自由記載">
         </div>
         <div class="submit">
             <button type="submit">投稿</button>

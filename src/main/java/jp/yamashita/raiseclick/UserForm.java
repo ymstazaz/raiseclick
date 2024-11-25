@@ -1,5 +1,6 @@
 package jp.yamashita.raiseclick;
 
+import jakarta.persistence.Entity;
 import lombok.Data;
 
 @Data
@@ -11,4 +12,5 @@ public class UserForm {
     private String city;
     private String gender;
     private String age;
+
 }

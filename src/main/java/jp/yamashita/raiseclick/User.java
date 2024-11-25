@@ -1,6 +1,12 @@
 package jp.yamashita.raiseclick;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "user")
 public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String name;
     private String address;
     private String password;

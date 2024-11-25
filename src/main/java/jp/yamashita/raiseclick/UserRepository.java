@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Select;
 
 @Mapper
 public interface UserRepository {
-    @Insert("insert into users (name,address,password,prefecture,city,gender,age) values (#{name},#{address},#{password},#{prefecture},#{city},#{gender},#{age})")
+    @Insert("insert into user (name,address,password,prefecture,city,gender,age) values (#{name},#{address},#{password},#{prefecture},#{city},#{gender},#{age})")
     void insert(String name,String address,String password,String prefecture,String city,String gender,String age);
 
     @Select("SELECT name,address FROM users where id = #{address}")
