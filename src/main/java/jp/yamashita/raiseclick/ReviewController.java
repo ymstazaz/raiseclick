@@ -25,6 +25,11 @@ public class ReviewController {
         return "reviewForm";
     }
 
+    @GetMapping("/")
+    public String showMainPage(){
+        return "main";
+    }
+
     @PostMapping("reviewForm")
     public String createSpot(@ModelAttribute("reviewForm")ReviewForm reviewForm, Model model){
         try {
