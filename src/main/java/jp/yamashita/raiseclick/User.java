@@ -1,12 +1,15 @@
 package jp.yamashita.raiseclick;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 @Entity
 @Table(name = "user")
+@Data
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
     private String address;
     private String password;
@@ -15,59 +18,4 @@ public class User {
     private String gender;
     private String age;
 
-    // Getters and Setters
-    public String getName(){
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getPrefecture() {
-        return prefecture;
-    }
-
-    public void setPrefecture(String prefecture) {
-        this.prefecture = prefecture;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public String getAge() {
-        return age;
-    }
-
-    public void setAge(String age) {
-        this.age = age;
-    }
 }
