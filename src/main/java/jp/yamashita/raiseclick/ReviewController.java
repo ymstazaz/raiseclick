@@ -1,5 +1,6 @@
 package jp.yamashita.raiseclick;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +20,14 @@ public class ReviewController {
     public  ReviewController(SpotService spotService){
         this.spotService = spotService;
     }
+
+    @GetMapping
+    public String showReviews(Model model){
+        var reviewList =reviewRepository.findAll();
+        model.addAttribute("reviewList",reviewList);
+        return "main";
+    }
+
     @GetMapping("/reviewForm")
     public String showReviewForm(Model model){
         model.addAttribute("reviewForm",new ReviewForm());

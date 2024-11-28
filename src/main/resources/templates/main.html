@@ -11,5 +11,26 @@
     <a th:href="@{/loginForm}">ログイン</a>
     <a th:href="@{/reviewForm}">クチコミ投稿</a>
 </header>
+<!--クチコミ一覧-->
+<ul class="review_lists">
+    <!-- reviewが存在する場合 -->
+    <th:block th:if="${review != null}">
+        <!-- reviewをループ -->
+        <li class="list" th:each="review : ${reviews}">
+            <a th:href="@{/#/{id}(id=${review.id})}">
+<!--                エリア-->
+                <div class="review_spot">
+                    <h3 class="spot_name" th:text="${spot.name}"></h3>
+                </div>
+<!--                        メイン目的-->
+
+<!--                        シチュエーション-->
+                <div class="review_situation">
+                    <h3 class="situation" th:text="${review.situation}"></h3>
+                </div>
+            </a>
+        </li>
+    </th:block>
+</ul>
 </body>
 </html>
