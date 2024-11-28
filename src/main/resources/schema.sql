@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS user (
- id          INT AUTO_INCREMENT PRIMARY KEY,
+ id          BIGINT AUTO_INCREMENT PRIMARY KEY,
  name        VARCHAR(50) NOT NULL,
  address     VARCHAR(100) NOT NULL UNIQUE,
  password    VARCHAR(255) NOT NULL,
@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS review(
  review_gender ENUM('男','女','秘密') NOT NULL,
  free_comment  TEXT,
  spot_id       BIGINT NOT NULL,
- user_id       INT,
+ user_id       BIGINT,
  created_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
  FOREIGN KEY (spot_id) REFERENCES spot(id),
  FOREIGN KEY (user_id) REFERENCES user(id)
