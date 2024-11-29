@@ -14,7 +14,7 @@
 </div>
 
 <div class="form">
-    <form th:action="@{/users}" th:method="post" th:object="${userForm}">
+    <form th:action="@{/signup}" th:method="post" th:object="${userForm}">
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
         <div class="user_name">
             <input type="text" th:field="*{name}" placeholder="名前を入力してください">

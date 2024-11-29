@@ -1,3 +1,4 @@
+--ENUMは一旦VARCHARになってる。落ち着いたら修正
 CREATE TABLE IF NOT EXISTS users (
  id          BIGINT AUTO_INCREMENT PRIMARY KEY,
  name        VARCHAR(50) NOT NULL,

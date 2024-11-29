@@ -69,30 +69,5 @@ public class UserController {
         }
         return "redirect:/loginForm";
     }
-
-
-    @PostMapping("/users")
-    public String createUser(UserForm userForm, Model model) {
-        try {
-            // ユーザー情報を挿入
-            User user = new User();
-            user.setName(userForm.getName());
-            user.setAddress(userForm.getAddress());
-            user.setPassword(passwordEncoder.encode(userForm.getPassword()));
-            user.setPrefecture(userForm.getPrefecture());
-            user.setCity(userForm.getCity());
-            user.setGender(userForm.getGender());
-            user.setAge(userForm.getAge());
-            user.setRole("ROLE_USER");
-
-//            UserService.createUser(user);
-        }
-            catch (Exception e) {
-            logger.error("Error occurred while creating user: ", e);
-            model.addAttribute("errorMessage", e.getMessage());
-            return "error";
-        }
-        return "redirect:/";
-    }
 }
 
