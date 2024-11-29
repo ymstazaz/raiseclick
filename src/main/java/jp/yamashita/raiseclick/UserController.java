@@ -3,6 +3,7 @@ package jp.yamashita.raiseclick;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,9 +21,8 @@ public class UserController {
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
+//    private UserRepository userRepository;
+    private PasswordEncoder passwordEncoder;
     public UserController(UserService userService) {
         this.userService = userService;
     }
@@ -47,20 +47,47 @@ public class UserController {
         return "userForm";
     }
 
+    @PostMapping("signup")
+    public String signup(@ModelAttribute UserForm userForm,Model model){
+        try {
+            User user = new User();
+            user.setName(userForm.getName());
+            user.setAddress(userForm.getAddress());
+            user.setPassword(passwordEncoder.encode(userForm.getPassword())); // パスワードを暗号化
+            user.setPrefecture(userForm.getPrefecture());
+            user.setCity(userForm.getCity());
+            user.setGender(userForm.getGender());
+            user.setAge(userForm.getAge());
+            user.setRole("ROLE_USER"); // デフォルトのロールを設定
+
+            // Userオブジェクトを渡してinsert
+            userService.createUser(user);
+        } catch (Exception e) {
+            logger.error("Error occurred while creating user: ", e);
+            model.addAttribute("errorMessage", e.getMessage());
+            return "error";
+        }
+        return "redirect:/loginForm";
+    }
+
+
     @PostMapping("/users")
     public String createUser(UserForm userForm, Model model) {
         try {
             // ユーザー情報を挿入
-            userRepository.insert(
-                    userForm.getName(),
-                    userForm.getAddress(),
-                    userForm.getPassword(),
-                    userForm.getPrefecture(),
-                    userForm.getCity(),
-                    userForm.getGender(),
-                    userForm.getAge()
-            );
-        } catch (Exception e) {
+            User user = new User();
+            user.setName(userForm.getName());
+            user.setAddress(userForm.getAddress());
+            user.setPassword(passwordEncoder.encode(userForm.getPassword()));
+            user.setPrefecture(userForm.getPrefecture());
+            user.setCity(userForm.getCity());
+            user.setGender(userForm.getGender());
+            user.setAge(userForm.getAge());
+            user.setRole("ROLE_USER");
+
+//            UserService.createUser(user);
+        }
+            catch (Exception e) {
             logger.error("Error occurred while creating user: ", e);
             model.addAttribute("errorMessage", e.getMessage());
             return "error";
@@ -68,3 +95,4 @@ public class UserController {
         return "redirect:/";
     }
 }
+

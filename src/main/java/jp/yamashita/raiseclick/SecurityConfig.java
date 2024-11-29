@@ -13,13 +13,14 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         http
-                .csrf().disable()
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("signup", "/login", "/css/style", "/js/**").permitAll()
+                        .requestMatchers("/signup", "/login", "/css/style", "/js/**","/","/reviewForm","/userForm").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
                         .loginPage("/login")
+                        .usernameParameter("address")
+                        .passwordParameter("password")
                         .defaultSuccessUrl("/main", true)
                         .permitAll()
                 )
