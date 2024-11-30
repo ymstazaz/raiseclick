@@ -6,31 +6,50 @@
 </head>
 <body>
 <header>
-    <a th:href="@{/}">RaiseClick</a>
-    <a th:href="@{/userForm}">新規登録</a>
+    <a th:href="@{/main}">RaiseClick</a>
     <a th:href="@{/loginForm}">ログイン</a>
     <a th:href="@{/reviewForm}">クチコミ投稿</a>
+    <ul>
+        <!-- ログインしている場合 -->
+        <th:block th:if="${#authentication != null and #authentication.principal != 'anonymousUser'}">
+            <li>
+                <a href="#" class="user_name" th:text="${#authentication.principal.username}">User Name</a>
+            </li>
+            <li>
+                <a href="/logout" class="logout" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">ログアウト</a>
+                <form id="logout-form" th:action="@{/logout}" method="post" style="display: none;">
+                    <input type="hidden" name="_csrf" th:value="${_csrf.token}">
+                </form>
+            </li>
+        </th:block>
+
+        <!-- ログインしていない場合 -->
+        <th:block th:unless="${#authentication != null and #authentication.principal != 'anonymousUser'}">
+            <li><a href="/loginForm" class="login">ログイン</a></li>
+            <li><a href="/userForm" class="signup">新規登録</a></li>
+        </th:block>
+    </ul>
 </header>
 <!--クチコミ一覧-->
-<ul class="review_lists">
+<!--<ul class="review_lists">-->
     <!-- reviewが存在する場合 -->
-    <th:block th:if="${review != null}">
+<!--    <th:block th:if="${review != null}">-->
         <!-- reviewをループ -->
-        <li class="list" th:each="review : ${reviews}">
-            <a th:href="@{/#/{id}(id=${review.id})}">
+<!--        <li class="list" th:each="review : ${reviews}">-->
+<!--            <a th:href="@{/#/{id}(id=${review.id})}">-->
 <!--                エリア-->
-                <div class="review_spot">
-                    <h3 class="spot_name" th:text="${spot.name}"></h3>
-                </div>
+<!--                <div class="review_spot">-->
+<!--                    <h3 class="spot_name" th:text="${spot.name}"></h3>-->
+<!--                </div>-->
 <!--                        メイン目的-->
 
 <!--                        シチュエーション-->
-                <div class="review_situation">
-                    <h3 class="situation" th:text="${review.situation}"></h3>
-                </div>
-            </a>
-        </li>
-    </th:block>
-</ul>
+<!--                <div class="review_situation">-->
+<!--                    <h3 class="situation" th:text="${review.situation}"></h3>-->
+<!--                </div>-->
+<!--            </a>-->
+<!--        </li>-->
+<!--    </th:block>-->
+<!--</ul>-->
 </body>
 </html>

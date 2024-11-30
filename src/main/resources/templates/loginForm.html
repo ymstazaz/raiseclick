@@ -8,7 +8,6 @@
 <body>
 <h1>ログイン画面</h1>
 <form th:action="@{/login}" method="post">
-    <input type="hidden" th:name="_csrf" th:value="${_csrf.token}" />
     <div>
         <label for="address">メールアドレス:</label>
         <input type="text" id="address" name="address" required>

@@ -34,9 +34,13 @@ public class ReviewController {
         return "reviewForm";
     }
 
-    @GetMapping("/")
+    @GetMapping("/main")
     public String showMainPage(){
         return "main";
+    }
+    @GetMapping("/")
+    public String redirectToMain() {
+        return "redirect:/main";
     }
 
     @PostMapping("reviewForm")
@@ -48,7 +52,7 @@ public class ReviewController {
             model.addAttribute("errorMessage", "登録に失敗しました。詳細: " + e.getMessage());
             return "error";
         }
-        return  "redirect:/";
+        return  "redirect:/main";
     }
     public String createReview(ReviewForm reviewForm,Long spotId)throws Exception{
         try{
@@ -62,6 +66,6 @@ public class ReviewController {
         } catch (Exception e) {
             throw new Exception("レビュー登録に失敗しました: " + e.getMessage(), e);
         }
-        return "redirect:/";
+        return "redirect:/main";
     }
 }

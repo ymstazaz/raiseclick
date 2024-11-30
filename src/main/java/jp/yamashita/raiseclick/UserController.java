@@ -67,7 +67,7 @@ public class UserController {
             model.addAttribute("errorMessage", e.getMessage());
             return "error";
         }
-        return "redirect:/loginForm";
+        return "redirect:/";
     }
 }
 
