@@ -7,11 +7,10 @@
 <body>
 <header>
     <a th:href="@{/main}">RaiseClick</a>
-    <a th:href="@{/loginForm}">ログイン</a>
     <a th:href="@{/reviewForm}">クチコミ投稿</a>
     <ul>
         <!-- ログインしている場合 -->
-        <th:block th:if="${#authentication != null and #authentication.authenticated}">
+        <th:block th:if="${#authentication != null and #authentication.principal != 'anonymousUser'}">
             <li>
                 <a href="#" class="user_name" th:text="${#authentication.principal.username}">User Name</a>
             </li>
