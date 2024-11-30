@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "review")
@@ -30,5 +31,8 @@ public class Review {
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = true) // ユーザーID（任意）
     private User user;
+//    中間テーブル連動（id接続がこっちにない場合）
+    @OneToMany(mappedBy = "review",cascade = CascadeType.ALL)
+    private List<ReviewPurpose> reviewPurpose;
 
 }

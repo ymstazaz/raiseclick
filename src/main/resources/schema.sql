@@ -29,4 +29,18 @@ CREATE TABLE IF NOT EXISTS review(
  FOREIGN KEY (user_id) REFERENCES user(id)
  );
 
+CREATE TABLE IF NOT EXISTS purpose(
+id            BIGINT AUTO_INCREMENT PRIMARY KEY,
+purpose_name  VARCHAR(100) NOT NULL UNIQUE
+);
+
+CREATE TABLE IF NOT EXISTS review_purpose(
+ id            BIGINT AUTO_INCREMENT PRIMARY KEY,
+ review_id     BIGINT NOT NULL,
+ purpose_id    BIGINT NOT NULL,
+ nth_purpose   INT,
+ satisfaction  INT,
+ FOREIGN KEY (review_id) REFERENCES review(id) ON DELETE CASCADE,
+ FOREIGN KEY (purpose_id) REFERENCES purpose(id) ON DELETE CASCADE
+ );
 
