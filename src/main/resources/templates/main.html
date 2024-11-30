@@ -11,7 +11,7 @@
     <a th:href="@{/reviewForm}">クチコミ投稿</a>
     <ul>
         <!-- ログインしている場合 -->
-        <th:block th:if="${#authentication != null and #authentication.principal != 'anonymousUser'}">
+        <th:block th:if="${#authentication != null and #authentication.authenticated}">
             <li>
                 <a href="#" class="user_name" th:text="${#authentication.principal.username}">User Name</a>
             </li>
