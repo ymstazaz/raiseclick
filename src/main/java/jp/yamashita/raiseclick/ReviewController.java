@@ -8,17 +8,25 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.logging.ErrorManager;
-
 @Controller
 public class ReviewController {
     private final SpotService spotService;
+    private final PurposeService purposeService;
+    private final ReviewRepository reviewRepository;
+    private final ReviewPurposeRepository reviewPurposeRepository;
 
     @Autowired
-    private ReviewRepository reviewRepository;
-    @Autowired
-    public  ReviewController(SpotService spotService){
+    public ReviewController(SpotService spotService, PurposeService purposeService,
+                            ReviewRepository reviewRepository, ReviewPurposeRepository reviewPurposeRepository) {
         this.spotService = spotService;
+        this.purposeService = purposeService;
+        this.reviewRepository = reviewRepository;
+        this.reviewPurposeRepository = reviewPurposeRepository;
+    }
+
+    @GetMapping("/")
+    public String redirectToMain() {
+        return "redirect:/main";
     }
 
     @GetMapping
@@ -28,34 +36,36 @@ public class ReviewController {
         return "main";
     }
 
+    @GetMapping("/main")
+    public String showMainPage(Model model){
+        var reviewList = reviewRepository.findAll();
+        model.addAttribute("reviewList", reviewList);
+        return "main";
+    }
+
     @GetMapping("/reviewForm")
     public String showReviewForm(Model model){
         model.addAttribute("reviewForm",new ReviewForm());
         return "reviewForm";
     }
 
-    @GetMapping("/main")
-    public String showMainPage(){
-        return "main";
-    }
-    @GetMapping("/")
-    public String redirectToMain() {
-        return "redirect:/main";
-    }
 
-    @PostMapping("reviewForm")
-    public String createSpot(@ModelAttribute("reviewForm")ReviewForm reviewForm, Model model){
+
+    @PostMapping("/reviewForm")
+    public String createReview(@ModelAttribute("reviewForm")ReviewForm reviewForm, Model model){
         try {
             Long spotId = spotService.findOrCreateSpot(reviewForm.getSpotName());
-            createReview(reviewForm,spotId);
+            Long reviewId = insertReview(reviewForm, spotId);
+            Long purposeId = purposeService.findOrCreatePurpose(reviewForm.getPurposeName());
+            insertReviewPurpose(reviewId, purposeId, reviewForm.getNthPurpose(), reviewForm.getSatisfaction());
         } catch (Exception e) {
             model.addAttribute("errorMessage", "登録に失敗しました。詳細: " + e.getMessage());
             return "error";
         }
         return  "redirect:/main";
     }
-    public String createReview(ReviewForm reviewForm,Long spotId)throws Exception{
-        try{
+    public Long insertReview(ReviewForm reviewForm, Long spotId)throws Exception {
+        try {
             reviewRepository.insert(
                     reviewForm.getSituation(),
                     reviewForm.getReviewAge(),
@@ -63,9 +73,17 @@ public class ReviewController {
                     reviewForm.getFreeComment(),
                     spotId
             );
+            return reviewRepository.findLatestId();
         } catch (Exception e) {
             throw new Exception("レビュー登録に失敗しました: " + e.getMessage(), e);
         }
-        return "redirect:/main";
+    }
+    private void insertReviewPurpose(Long reviewId, Long purposeId, Integer nthPurpose, Integer satisfaction) throws Exception {
+        try {
+            reviewPurposeRepository.insertReviewPurpose(reviewId, purposeId, nthPurpose, satisfaction);
+        } catch (Exception e) {
+            throw new Exception("中間テーブル登録に失敗しました: " + e.getMessage(), e);
+
+        }
     }
 }

@@ -18,7 +18,7 @@ public class Spot {
     public Long getId(){
         return  id;
     }
-    public void steId(Long id){
+    public void setId(Long id){
         this.id = id;
     }
     public String getSpotName(){
