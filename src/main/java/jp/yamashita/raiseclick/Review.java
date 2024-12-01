@@ -34,5 +34,8 @@ public class Review {
 //    中間テーブル連動（id接続がこっちにない場合）
     @OneToMany(mappedBy = "review",cascade = CascadeType.ALL)
     private List<ReviewPurpose> reviewPurpose;
-
+    // SpotのIDを取得する補助メソッド
+    public Long getSpotId() {
+        return this.spot != null ? this.spot.getId() : null;
+    }
 }

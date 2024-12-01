@@ -1,7 +1,11 @@
 package jp.yamashita.raiseclick;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
+import java.util.List;
+
+@Data
 @Entity
 @Table(name = "spot")
 public class Spot {
@@ -15,18 +19,9 @@ public class Spot {
     public Spot(String spotName){
         this.spotName = spotName;
     }
-    public Long getId(){
-        return  id;
-    }
-    public void setId(Long id){
-        this.id = id;
-    }
-    public String getSpotName(){
-        return  spotName;
-    }
-    public void setSpotName(String spotName){
-        this.spotName = spotName;
-    }
+    //    クチコミテーブル連動（id接続がこっちにない場合）
+    @OneToMany(mappedBy = "spot", cascade = CascadeType.ALL)
+    private List<Review> review;
 
     @Override
     public  String toString(){

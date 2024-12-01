@@ -30,25 +30,32 @@
     </ul>
 </header>
 <!--クチコミ一覧-->
-<!--<ul class="review_lists">-->
+<!-- クチコミ一覧 -->
+<ul class="review_lists">
     <!-- reviewが存在する場合 -->
-<!--    <th:block th:if="${review != null}">-->
+    <th:block th:if="${review != null && !reviewList.isEmpty()}">
         <!-- reviewをループ -->
-<!--        <li class="list" th:each="review : ${reviews}">-->
-<!--            <a th:href="@{/#/{id}(id=${review.id})}">-->
-<!--                エリア-->
-<!--                <div class="review_spot">-->
-<!--                    <h3 class="spot_name" th:text="${spot.name}"></h3>-->
-<!--                </div>-->
-<!--                        メイン目的-->
-
-<!--                        シチュエーション-->
-<!--                <div class="review_situation">-->
-<!--                    <h3 class="situation" th:text="${review.situation}"></h3>-->
-<!--                </div>-->
-<!--            </a>-->
-<!--        </li>-->
-<!--    </th:block>-->
-<!--</ul>-->
+        <li class="list" th:each="review : ${reviewList}">
+            <a th:href="@{/review/{id}(id=${review.id})}">
+                <!-- エリア -->
+                <div class="review_spot">
+                    <h3 class="spot_name" th:text="${spot.spotName}"></h3>
+                </div>
+                <!-- メイン目的 -->
+                <div class="review_purpose">
+                    <h4 class="purpose" th:text="${purpose.purposeName}"></h4>
+                </div>
+                <!-- シチュエーション -->
+                <div class="review_situation">
+                    <h3 class="situation" th:text="${review.situation}"></h3>
+                </div>
+            </a>
+        </li>
+    </th:block>
+    <!-- reviewが存在しない場合 -->
+    <th:block th:unless="${reviews != null && !reviews.isEmpty()}">
+        <p>現在クチコミはありません。</p>
+    </th:block>
+</ul>
 </body>
 </html>

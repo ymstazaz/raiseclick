@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 @Mapper
 public interface SpotRepository {
     @Insert("insert into spot(spot_name) value (#{spotName})")
@@ -12,4 +14,8 @@ public interface SpotRepository {
 
     @Select("select * from spot where spot_name = #{spotName}")
     Spot findBySpotName(String spotName);
+    @Select("SELECT * FROM spot")
+    List<Spot> findAllSpot();
+    @Select("SELECT * FROM spot WHERE id = #{id}")
+    Spot findById(Long id);
 }

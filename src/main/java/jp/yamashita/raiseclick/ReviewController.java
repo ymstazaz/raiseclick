@@ -12,14 +12,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class ReviewController {
     private final SpotService spotService;
     private final PurposeService purposeService;
+    private final SpotRepository spotRepository;
     private final ReviewRepository reviewRepository;
     private final ReviewPurposeRepository reviewPurposeRepository;
 
     @Autowired
-    public ReviewController(SpotService spotService, PurposeService purposeService,
+    public ReviewController(SpotService spotService, PurposeService purposeService, SpotRepository spotRepository,
                             ReviewRepository reviewRepository, ReviewPurposeRepository reviewPurposeRepository) {
         this.spotService = spotService;
         this.purposeService = purposeService;
+        this.spotRepository = spotRepository;
         this.reviewRepository = reviewRepository;
         this.reviewPurposeRepository = reviewPurposeRepository;
     }
@@ -39,6 +41,18 @@ public class ReviewController {
     @GetMapping("/main")
     public String showMainPage(Model model){
         var reviewList = reviewRepository.findAll();
+//        Spot・目的・中間テーブルにて個別にファインドを設定
+        for (Review review : reviewList){
+            if(review.getSpot() ==null && review.getSpotId() !=null){
+                var spot = spotRepository.findById(review.getSpotId());
+                review.setSpot(spot);
+            }
+            if(review.getReviewPurpose() == null){
+                var purpose = reviewPurposeRepository.findByReviewId(review.getId());
+                review.setReviewPurpose(purpose);
+            }
+        }
+        System.out.println("レビューリスト: " + reviewList);
         model.addAttribute("reviewList", reviewList);
         return "main";
     }
