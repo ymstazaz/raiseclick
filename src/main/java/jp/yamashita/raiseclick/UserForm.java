@@ -1,6 +1,6 @@
 package jp.yamashita.raiseclick;
 
-import jakarta.persistence.Entity;
+
 import lombok.Data;
 
 @Data

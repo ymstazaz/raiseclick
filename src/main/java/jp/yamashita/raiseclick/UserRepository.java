@@ -3,10 +3,6 @@ package jp.yamashita.raiseclick;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
-import org.springframework.data.jpa.repository.JpaRepository;
-
-import java.sql.Struct;
-import java.util.Optional;
 
 @Mapper
 public interface UserRepository{
