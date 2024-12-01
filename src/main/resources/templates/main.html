@@ -39,11 +39,11 @@
             <a th:href="@{/review/{id}(id=${review.id})}">
                 <!-- エリア -->
                 <div class="review_spot">
-                    <h3 class="spot_name" th:text="${spot.spotName}"></h3>
+                    <h3 class="spot_name" th:if="${review.spot != null}" th:text="${review.spot.spotName}"></h3>
                 </div>
                 <!-- メイン目的 -->
                 <div class="review_purpose">
-                    <h4 class="purpose" th:text="${purpose.purposeName}"></h4>
+                    <h4 class="purpose" th:text="${review.purpose.purposeName}"></h4>
                 </div>
                 <!-- シチュエーション -->
                 <div class="review_situation">

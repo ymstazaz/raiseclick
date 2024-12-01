@@ -28,7 +28,7 @@ public class Review {
     @JoinColumn(name = "spot_id", nullable = false) // スポットID（必須）
     private Spot spot;
 //    ユーザー連動（任意）
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id", nullable = true) // ユーザーID（任意）
     private User user;
 //    中間テーブル連動（id接続がこっちにない場合）

@@ -40,15 +40,22 @@ public class ReviewController {
 
     @GetMapping("/main")
     public String showMainPage(Model model){
+//       ↓ reviewから全てのデータを取得
         var reviewList = reviewRepository.findAll();
-//        Spot・目的・中間テーブルにて個別にファインドを設定
+//       ↓ Spot・目的・中間テーブルにて個別にfindをすることで↑でとったIdと連動させていく
         for (Review review : reviewList){
+//            ↓レビューのスポット情報が不足していてスポットIdが取得できる場合、
             if(review.getSpot() ==null && review.getSpotId() !=null){
+//                ↓spotリポジトリを使ってID検索して、
                 var spot = spotRepository.findById(review.getSpotId());
+//                ↓レビューにスポットを設置する
                 review.setSpot(spot);
             }
+//            ↓レビューの中間テーブル情報が不足している場合、
             if(review.getReviewPurpose() == null){
+//                ↓中間テーブルのリポジトリを使ってレビューIdから目的Idを取得して、
                 var purpose = reviewPurposeRepository.findByReviewId(review.getId());
+//                ↓レビューに中間テーブルの情報を設置する
                 review.setReviewPurpose(purpose);
             }
         }
