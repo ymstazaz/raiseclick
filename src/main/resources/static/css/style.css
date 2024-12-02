@@ -1,0 +1,104 @@
+/* 全体の設定 */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #F5F5DC; /* ベージュ系背景 */
+    color: #B22222; /* 濃いエンジ */
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+/* ヘッダー */
+header {
+    background-color: #B22222; /* 濃いエンジ */
+    color: #FFF; /* 白文字 */
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 1.5em;
+}
+
+header a {
+    color: #FFF;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* ページタイトル */
+.page-title {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.page-title h1 {
+    font-size: 2em;
+    color: #D2691E; /* 明るいエンジ */
+}
+
+/* フォーム全体 */
+.form {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #FAFAD2; /* 薄いベージュ */
+    border: 1px solid #C0C0C0;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* フォーム要素 */
+form div {
+    margin-bottom: 20px;
+}
+
+form label {
+    display: block;
+    font-size: 1.1em;
+    margin-bottom: 5px;
+    color: #8B0000;
+}
+
+form input,
+form select {
+    width: 100%;
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #C0C0C0;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: #FFF;
+}
+
+form input::placeholder {
+    color: #A9A9A9; /* グレー */
+}
+
+/* ボタン */
+button {
+    background-color: #B22222; /* エンジ*/
+    color: #FFF; /* 白文字 */
+    padding: 10px 20px;
+    font-size: 1em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #D2691E; /* 明るいエンジ */
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 600px) {
+    .form {
+        padding: 15px;
+    }
+
+    form label {
+        font-size: 1em;
+    }
+
+    button {
+        width: 100%;
+    }
+}

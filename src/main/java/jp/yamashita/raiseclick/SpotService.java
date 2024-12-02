@@ -12,7 +12,8 @@ public class SpotService {
         if (spot == null){
             spot = new Spot();
             spot.setSpotName(spotName);
-            spotRepository.insertSpot(spot);
+            spotRepository.insertSpot(spot); // 新規作成
+            spot = spotRepository.findBySpotName(spotName); // 作成後に再取得
         }
         return spot.getId();
     }

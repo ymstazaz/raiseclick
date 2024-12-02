@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link rel="stylesheet" href="/css/style.css">
     <meta charset="UTF-8">
     <title>ユーザー新規登録</title>
 </head>
@@ -17,15 +18,19 @@
     <form th:action="@{/signup}" th:method="post" th:object="${userForm}">
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
         <div class="user_name">
-            <input type="text" th:field="*{name}" placeholder="名前を入力してください">
+            <label for="name">好きなお名前を入力してください</label>
+            <input type="text" id="name" th:field="*{name}" placeholder="例：太郎・たろう・Taro">
         </div>
         <div class="user_address">
-            <input type="text" th:field="*{address}" placeholder="メールアドレスを入力してください">
+            <label for="address">ご利用のemailをご入力ください</label>
+            <input type="text" id="address" th:field="*{address}" placeholder="例：111@111">
         </div>
         <div class="user_password">
-            <input type="text" th:field="*{password}" placeholder="パスワードを英数ミックスで入力してください">
+            <label for="password">パスワードを英数ミックスで6文字以上でご入力ください</label>
+            <input type="text" id="password"  th:field="*{password}" placeholder="例：123456a">
         </div>
         <div class="user_prefecture">
+            <label for="prefecture">都道府県をご選択してください</label>
             <select id="prefecture" th:field="*{prefecture}" required="required">
                 <option value="">選択してください</option>
                 <option th:each="prefecture : ${prefectures}"
@@ -35,9 +40,11 @@
             </select>
         </div>
         <div class="user_city">
-            <input type="text" th:field="*{city}" placeholder="お住まいの市区を入力してください">
+            <label for="city">お住まいの市区を入力してください</label>
+            <input type="text" id="city" th:field="*{city}" placeholder="例：名古屋市">
         </div>
         <div class="user_gender">
+            <label for="gender">性別を選択してください</label>
             <select id="gender" th:field="*{gender}" required="required">
                 <option value="">選択してください</option>
                 <option value="男">男</option>
@@ -46,6 +53,7 @@
             </select>
         </div>
         <div class="user_age">
+            <label for="age">年齢を選択してください</label>
             <select id="age" th:field="*{age}" required="required">
                 <option value="">選択してください</option>
                 <option value="10代">10代</option>
