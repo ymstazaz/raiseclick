@@ -33,7 +33,7 @@ public class ReviewController {
 
     @GetMapping
     public String showReviews(Model model){
-        var reviewList =reviewRepository.findAll();
+        var reviewList =reviewRepository.findAllWithDetails();
         model.addAttribute("reviewList",reviewList);
         return "main";
     }
