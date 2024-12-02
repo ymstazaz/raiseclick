@@ -16,9 +16,5 @@ public class Review {
     private LocalDateTime createdAt = LocalDateTime.now();
     private Spot spot;
     private User user;
-    private List<ReviewPurpose> reviewPurpose;
-//    これ何用？
-    public Long getSpotId() {
-        return this.spot != null ? this.spot.getId() : null;
-    }
+    private List<ReviewPurpose> reviewPurposes;
 }

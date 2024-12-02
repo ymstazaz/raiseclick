@@ -11,17 +11,17 @@ public interface ReviewRepository {
     @Select("""
             select
               r.id,
-              r.image_path,
               r.situation,
               r.review_age,
               r.review_gender,
               r.free_comment,
               r.created_at,
-              s.id,
+              s.id as stop_id,
               s.spot_name,
-              rp.id,
+              rp.id as review_purpose_id,
               rp.nth_purpose,
               rp.satisfaction,
+              p.id as purpose_id,
               p.purpose_name
             from
               review r
@@ -32,19 +32,43 @@ public interface ReviewRepository {
             left join
               purpose p on p.id = rp.purpose_id
             """)
-    @Results({
-        @Result(property = "id", column = "review_id"),
+    @Results(
+        id = "reviewResultMap", value = {
+        @Result(id = true, property = "id", column = "id"),
         @Result(property = "situation", column = "situation"),
         @Result(property = "reviewAge", column = "review_age"),
         @Result(property = "reviewGender", column = "review_gender"),
         @Result(property = "freeComment", column = "free_comment"),
-        @Result(property = "spotName", column = "spot_name"),
-        @Result(property = "nthPurpose", column = "nth_purpose"),
-        @Result(property = "purposeName", column = "purpose_name")
+        @Result(property = "createdAt", column = "created_at"),
+        @Result(property = "spot", one = @One(resultMap = "spotResultMap")),
+        @Result(property = "reviewPurposes", many = @Many(resultMap = "reviewPurposeResultMap")),
     })
     List<Review> findAllWithDetails();
 
-//保存機能
+    @Select("SELECT '1'") // このクエリは実行されない。@ResultMap を定義するためのダミークエリ
+    @Results(id = "spotResultMap", value = {
+        @Result(id = true, property = "id", column = "spot_id"),
+        @Result(property = "spotName", column = "spot_name"),
+    })
+    Review __spotResultMap();
+
+    @Select("SELECT '1'") // このクエリは実行されない。@ResultMap を定義するためのダミークエリ
+    @Results(id = "reviewPurposeResultMap", value = {
+        @Result(id = true, property = "id", column = "review_purpose_id"),
+        @Result(property = "nthPurpose", column = "nth_purpose"),
+        @Result(property = "satisfaction", column = "satisfaction"),
+        @Result(property = "purpose", one = @One(resultMap = "purposeResultMap")),
+    })
+    Review __reviewPurposeResultMap();
+
+    @Select("SELECT '1'") // このクエリは実行されない。@ResultMap を定義するためのダミークエリ
+    @Results(id = "purposeResultMap", value = {
+        @Result(id = true, property = "id", column = "purpose_id"),
+        @Result(property = "purposeName", column = "purpose_name"),
+    })
+    Review __purposeResultMap();
+
+    //保存機能
     @Insert("INSERT INTO review (situation, review_age, review_gender, free_comment, spot_id) VALUES (#{situation}, #{reviewAge}, #{reviewGender}, #{freeComment}, #{spotId})")
     void insert(String situation, String reviewAge, String reviewGender, String freeComment, Long spotId);
     @Select("select LAST_INSERT_ID()")
