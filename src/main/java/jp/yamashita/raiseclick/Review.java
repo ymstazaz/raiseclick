@@ -16,5 +16,5 @@ public class Review {
     private LocalDateTime createdAt = LocalDateTime.now();
     private Spot spot;
     private User user;
-    private List<ReviewPurpose> reviewPurpose;
+    private List<ReviewPurpose> reviewPurposes;
 }

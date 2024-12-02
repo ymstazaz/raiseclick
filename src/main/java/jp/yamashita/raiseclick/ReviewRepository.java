@@ -32,8 +32,9 @@ public interface ReviewRepository {
             left join
               purpose p on p.id = rp.purpose_id
             """)
-    @Results({
-            @Result(property = "id", column = "review_id"),
+    @Results(
+            id = "reviewResultMap", value = {
+            @Result(id = true, property = "id", column = "review_id"),
             @Result(property = "situation", column = "situation"),
             @Result(property = "reviewAge", column = "review_age"),
             @Result(property = "reviewGender", column = "review_gender"),
@@ -41,15 +42,31 @@ public interface ReviewRepository {
             @Result(property = "createdAt", column = "created_at"),
             @Result(property = "spot", one = @One(resultMap = "spotResultMap")),
             @Result(property = "reviewPurposes", many = @Many(resultMap = "reviewPurposeResultMap")),
+    })
+    List<Review> findAllWithDetails();
+
+    @Select("SELECT '1'") // このクエリは実行されない。@ResultMap を定義するためのダミークエリ
+    @Results(id = "spotResultMap", value = {
+            @Result(id = true, property = "id", column = "spot_id"),
             @Result(property = "spotName", column = "spot_name"),
+    })
+    Review __spotResultMap();
+
+    @Select("SELECT '1'") // このクエリは実行されない。@ResultMap を定義するためのダミークエリ
+    @Results(id = "reviewPurposeResultMap", value = {
+            @Result(id = true, property = "id", column = "review_purpose_id"),
             @Result(property = "nthPurpose", column = "nth_purpose"),
             @Result(property = "satisfaction", column = "satisfaction"),
             @Result(property = "purpose", one = @One(resultMap = "purposeResultMap")),
     })
-    List<Review> findAllWithDetails();
+    Review __reviewPurposeResultMap();
 
-    @Select("SELECT '1'")  // このクエリは実行されない。@ResultMap を定義するためのダミークエリ
-    @Results(id = "spotResultMap",value = {})
+    @Select("SELECT '1'") // このクエリは実行されない。@ResultMap を定義するためのダミークエリ
+    @Results(id = "purposeResultMap", value = {
+            @Result(id = true, property = "id", column = "purpose_id"),
+            @Result(property = "purposeName", column = "purpose_name"),
+    })
+    Review __purposeResultMap();
 
     //保存機能
     @Insert("INSERT INTO review (situation, review_age, review_gender, free_comment, spot_id) VALUES (#{situation}, #{reviewAge}, #{reviewGender}, #{freeComment}, #{spotId})")
