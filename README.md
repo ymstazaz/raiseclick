@@ -32,7 +32,7 @@ raise click
 ➡️1月中旬目処で実装完了させたい。
 
 # データベース設計
-➡️miroにて管理（https://gyazo.com/1738615a21408a661c12dd0122ac5c94）
+➡️miroにて管理　https://gyazo.com/1738615a21408a661c12dd0122ac5c94　　
 usersテーブル
  id          BIGINT AUTO_INCREMENT PRIMARY KEY,
  name        VARCHAR(50) NOT NULL,
@@ -75,7 +75,7 @@ usersテーブル
 
 
 # 画面遷移図
-➡️miroにて管理（https://gyazo.com/380c7a7031060c083aa5cc07da9cb165）
+➡️miroにて管理　https://gyazo.com/380c7a7031060c083aa5cc07da9cb165　　
 
 # 開発環境
 IntelliJ
