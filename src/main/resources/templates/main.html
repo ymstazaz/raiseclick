@@ -39,14 +39,17 @@
                 <!-- エリア -->
                 <div class="review_spot">
                     <h3 class="spot_name" th:if="${review.spot != null}" th:text="${review.spot.spotName}"></h3>
+                    <h3 class="spot_name" th:unless="${review.spot != null}">エリア情報なし</h3>
                 </div>
                 <!-- メイン目的 -->
                 <div class="review_purpose">
                     <h4 class="purpose" th:text="${review.purpose.purposeName}"></h4>
+                    <h4 class="purpose" th:unless="${review.purpose != null}">目的情報なし</h4>
                 </div>
                 <!-- シチュエーション -->
                 <div class="review_situation">
                     <h3 class="situation" th:text="${review.situation}"></h3>
+                    <h3 class="situation" th:unless="${review.situation != null}">シチュエーション情報なし</h3>
                 </div>
             </a>
         </li>

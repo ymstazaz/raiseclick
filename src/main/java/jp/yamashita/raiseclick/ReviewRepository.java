@@ -48,7 +48,7 @@ public interface ReviewRepository {
     @Select("SELECT '1'") // このクエリは実行されない。@ResultMap を定義するためのダミークエリ
     @Results(id = "spotResultMap", value = {
             @Result(id = true, property = "id", column = "spot_id"),
-            @Result(property = "spotName", column = "spot_name"),
+            @Result(property = "spotName", column = "spot_name", javaType = String.class),
     })
     Review __spotResultMap();
 

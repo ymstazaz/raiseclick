@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+
 @Controller
 public class ReviewController {
     private final SpotService spotService;
@@ -26,24 +28,18 @@ public class ReviewController {
         this.reviewPurposeRepository = reviewPurposeRepository;
     }
 
+
     @GetMapping("/")
     public String redirectToMain() {
         return "redirect:/main";
     }
 
-    @GetMapping
-    public String showReviews(Model model){
-        var reviewList =reviewRepository.findAllWithDetails();
-        model.addAttribute("reviewList",reviewList);
-        return "main";
-    }
-
     @GetMapping("/main")
     public String showMainPage(Model model){
         // リポジトリで全データを取得
-        var reviewList = reviewRepository.findAllWithDetails();
-
+        List<Review> reviewList = reviewRepository.findAllWithDetails();
         // 取得したデータをモデルに渡す
+        System.out.println("レビューリスト: " + reviewList);
         model.addAttribute("reviewList", reviewList);
         return "main";
     }
