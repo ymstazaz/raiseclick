@@ -11,7 +11,9 @@
     <a th:href="@{/reviewForm}">クチコミ投稿</a>
 </header>
 
-    <main>
+<main>
+    <!-- 検索フォーム -->
+    <section class="search-form">
         <form th:action="@{/search}" method="get">
             <label for="situation">シチュエーション:</label>
             <select id="situation" name="situation" required>
@@ -45,17 +47,30 @@
 
             <button type="submit">検索</button>
         </form>
+    </section>
 
+    <!-- クチコミリスト -->
     <section>
-        <h2>検索結果</h2>
-        <ul>
-            <li th:each="review : ${reviewList}">
-                <h3 th:text="'シチュエーション: ' + ${review.situation}"></h3>
-                <p th:text="'年代: ' + ${review.reviewAge}"></p>
-                <p th:text="'目的: ' + ${review.reviewPurposes[0]?.purpose?.purposeName}"></p>
-                <p th:text="'スポット名: ' + ${review.spot?.spotName}"></p>
-                <p th:text="'性別: ' + ${review.reviewGender}"></p>
-                <p th:text="'フリーコメント: ' + ${review.freeComment}"></p>
+        <ul class="review_lists">
+            <li class="list" th:each="review : ${reviewList}">
+                <div class="review_spot">旅行先
+                    <h3 class="spot_name" th:text="${review.spot?.spotName}"></h3>
+                </div>
+                <div class="review_purpose">メイン目的
+                    <h3 class="purpose" th:text="${review.reviewPurposes[0]?.purpose?.purposeName}"></h3>
+                </div>
+                <div class="review_situation">シチュエーション
+                    <h3 class="situation" th:text="${review.situation}"></h3>
+                </div>
+                <div class="review_gender">性別
+                    <h3 class="review_gender" th:text="${review.reviewGender}"></h3>
+                </div>
+                <div class="review_age">年代
+                    <h3 class="review_age" th:text="${review.reviewAge}"></h3>
+                </div>
+                <div class="free_comment">フリーコメント
+                    <p th:text="${review.freeComment}"></p>
+                </div>
             </li>
         </ul>
     </section>
@@ -63,6 +78,5 @@
     <!-- 検索結果がない場合 -->
     <p th:if="${#lists.isEmpty(reviewList)}">検索結果が見つかりませんでした。</p>
 </main>
-
 </body>
 </html>
