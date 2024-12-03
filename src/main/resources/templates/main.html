@@ -9,6 +9,7 @@
 <header>
     <a th:href="@{/main}">RaiseClick</a>
     <a th:href="@{/reviewForm}">クチコミ投稿</a>
+    <a th:href="@{/search}">旅先検索</a>
     <ul>
         <!-- ログインしている場合 -->
         <th:block th:if="${#authentication != null and #authentication.principal != 'anonymousUser'}">
