@@ -15,7 +15,6 @@ public class Review {
     private String freeComment;
     private LocalDateTime createdAt = LocalDateTime.now();
     private Spot spot;
-    private String spotName; // デバッグ用のフィールド
     private User user;
     private List<ReviewPurpose> reviewPurposes;
 }

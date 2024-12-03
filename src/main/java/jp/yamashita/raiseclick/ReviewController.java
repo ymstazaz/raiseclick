@@ -7,8 +7,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class ReviewController {
@@ -17,15 +19,17 @@ public class ReviewController {
     private final SpotRepository spotRepository;
     private final ReviewRepository reviewRepository;
     private final ReviewPurposeRepository reviewPurposeRepository;
+    private final ReviewService reviewService;
 
     @Autowired
     public ReviewController(SpotService spotService, PurposeService purposeService, SpotRepository spotRepository,
-                            ReviewRepository reviewRepository, ReviewPurposeRepository reviewPurposeRepository) {
+                            ReviewRepository reviewRepository, ReviewPurposeRepository reviewPurposeRepository, ReviewService reviewService) {
         this.spotService = spotService;
         this.purposeService = purposeService;
         this.spotRepository = spotRepository;
         this.reviewRepository = reviewRepository;
         this.reviewPurposeRepository = reviewPurposeRepository;
+        this.reviewService = reviewService;
     }
 
 
@@ -39,9 +43,21 @@ public class ReviewController {
         // リポジトリで全データを取得
         List<Review> reviewList = reviewRepository.findAllWithDetails();
         // 取得したデータをモデルに渡す
-        System.out.println("レビューリスト: " + reviewList);
         model.addAttribute("reviewList", reviewList);
         return "main";
+    }
+
+    @GetMapping("/search")
+    public String showSearchPage{
+        public String searchReviews(@RequestParam(required = false) String situation,
+                @RequestParam(required = false) String spotName,
+                @RequestParam(required = false) String purposeName,
+                @RequestParam(required = false) String reviewAge,
+                Model model) {
+            List<Review> reviews = reviewService.searchReviews(situation, spotName, purposeName, reviewAge);
+            model.addAttribute("reviews", reviews);
+            return "search";
+        }
     }
 
     @GetMapping("/reviewForm")

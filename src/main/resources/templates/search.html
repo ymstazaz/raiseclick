@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="/css/main.css">
+    <meta charset="UTF-8">
+    <title>Search Page</title>
+</head>
+<body>
+<header>
+    <a th:href="@{/main}">RaiseClick</a>
+    <a th:href="@{/reviewForm}">クチコミ投稿</a>
+    <ul>
+        <!-- ログインしている場合 -->
+        <th:block th:if="${#authentication != null and #authentication.principal != 'anonymousUser'}">
+            <li>
+                <a href="#" class="user_name" th:text="${#authentication.principal.username}">User Name</a>
+            </li>
+            <li>
+                <a href="/logout" class="logout" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">ログアウト</a>
+                <form id="logout-form" th:action="@{/logout}" method="post" style="display: none;">
+                    <input type="hidden" name="_csrf" th:value="${_csrf.token}">
+                </form>
+            </li>
+        </th:block>
+
+        <!-- ログインしていない場合 -->
+        <th:block th:unless="${#authentication != null and #authentication.principal != 'anonymousUser'}">
+            <li><a href="/loginForm" class="login">ログイン</a></li>
+            <li><a href="/userForm" class="signup">新規登録</a></li>
+        </th:block>
+    </ul>
+</header>
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="/css/main.css">
+    <meta charset="UTF-8">
+    <title>Search Reviews</title>
+</head>
+<body>
+<header>
+    <a th:href="@{/main}">RaiseClick</a>
+    <a th:href="@{/reviewForm}">クチコミ投稿</a>
+</header>
+
+<!-- 検索フォーム -->
+<section class="search-form">
+    <form th:action="@{/reviews/search}" method="get">
+        <label for="situation">シチュエーション</label>
+        <input type="text" id="situation" name="situation" placeholder="例: 一人旅" />
+
+        <label for="spotName">訪問先</label>
+        <input type="text" id="spotName" name="spotName" placeholder="例: 東京, 京都" />
+
+        <label for="purposeName">目的</label>
+        <input type="text" id="purposeName" name="purposeName" placeholder="例: 温泉, 食" />
+
+        <label for="reviewAge">年齢</label>
+        <select id="reviewAge" name="reviewAge">
+            <option value="">選択してください</option>
+            <option value="10代">10代</option>
+            <option value="20代">20代</option>
+            <option value="30代">30代</option>
+            <option value="40代">40代</option>
+            <option value="50代以上">50代以上</option>
+        </select>
+
+        <button type="submit">検索</button>
+    </form>
+</section>
+
+<!-- 検索結果表示 -->
+<section class="search-results">
+    <h2>検索結果</h2>
+    <ul class="review_lists">
+        <!-- レビューリストをループ表示 -->
+        <li class="list" th:each="review : ${reviews}">
+            <a th:href="@{/review/{id}(id=${review.id})}">
+                <!-- エリア -->
+                <div class="review_spot">旅行先:
+                    <h3 class="spot_name" th:text="${review.spot != null ? review.spot.spotName : 'エリア情報なし'}"></h3>
+                </div>
+                <!-- メイン目的 -->
+                <div class="review_purpose">メイン目的:
+                    <h4 class="purpose" th:text="${review.reviewPurposes != null && !review.reviewPurposes.isEmpty() ? review.reviewPurposes[0].purpose.purposeName : '目的情報なし'}"></h4>
+                </div>
+                <!-- シチュエーション -->
+                <div class="review_situation">シチュエーション:
+                    <h3 class="situation" th:text="${review.situation != null ? review.situation : 'シチュエーション情報なし'}"></h3>
+                </div>
+            </a>
+        </li>
+
+        <!-- 検索結果がない場合 -->
+        <th:block th:if="${reviews == null || reviews.isEmpty()}">
+            <p>検索結果がありません。</p>
+        </th:block>
+    </ul>
+</section>
+</body>
+</html>
+
+
+</body>
+</html>
