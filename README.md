@@ -22,15 +22,23 @@ raise click
 
 # 実装した機能についての画像やGIFおよびその説明
 ・ユーザー新規登録機能
+https://gyazo.com/bffa52e80aa043bb48a7e90da5d23136
 
-Uploading 画面収録 2024-12-03 23.31.54.mov…
+
+https://github.com/user-attachments/assets/f6b8f960-037e-4d46-95e3-26118c4c0f88
 
 
 ・ログイン機能
+https://gyazo.com/998618fef20a83bbee931dfa38674bbf
+
+・ログアウト機能
+https://gyazo.com/c646711331699b511ebbadd2e7348470
 
 ・クチコミ投稿機能
+https://gyazo.com/6b62c6af5ca513093707d45aeac91ead
 
 ・旅先検索機能
+https://gyazo.com/7485ccf6e4419cf6f15f119733e2a791
 
 
 # 実装予定機能
