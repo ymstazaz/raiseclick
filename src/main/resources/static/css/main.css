@@ -54,16 +54,22 @@ header .user_name {
     margin: 2em auto;
     padding: 0;
     list-style: none;
+    justify-content: center; /* 中央揃え */
 }
 
 .list {
-    background-color: #fff;
+    background-color: #ffffff;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     padding: 1em;
-    flex: 1 1 calc(33.333% - 1.5em); /* 3つ横並び */
+    width: 300px; /* 固定幅 */
     box-sizing: border-box;
     transition: box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    justify-content: space-between; /* 内容を上下にスペース */
+    text-align: left; /* テキスト揃え */
 }
 
 .list:hover {
