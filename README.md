@@ -22,33 +22,40 @@ raise click
 
 # 実装した機能についての画像やGIFおよびその説明
 ・ユーザー新規登録機能・ログイン機能
-
-
-https://github.com/user-attachments/assets/f6b8f960-037e-4d46-95e3-26118c4c0f88
 └メインページから必要情報を入力すると新規登録、ログインができ、ログインし次第登録のアドレスが表示される。
 また、メインページにはこれまでのクチコミ投稿が簡易で見れる。
 
+
+https://github.com/user-attachments/assets/9ae34192-8cac-47eb-bb97-ad4e5fa5bf8d
+
+
+
 ・ログアウト機能
-
-
-https://github.com/user-attachments/assets/fdabf5c9-5581-45f6-bb45-262502fdbaf6
 └メインページよりログアウトができる
 
+
+https://github.com/user-attachments/assets/264fd837-b4c5-41ec-af94-a5fa5dc3c9f3
+
+
+
 ・クチコミ投稿機能
-
-
-https://github.com/user-attachments/assets/e7d432bb-1a83-468a-a9ef-5bd26ff80ab2
 └メインページ、もしくは旅先検索のどちらかのヘッダーからクチコミ投稿ボタンを押すと
 クチコミ投稿ページに遷移し、任意の項目以外を入力し、投稿ボタンを押すと投稿でき、メインページにリダイレクトされる。
 ※シチュエーションと年代は選択式
 
+
+https://github.com/user-attachments/assets/2982ac86-63c4-4992-9fb0-0c49c65b4dd9
+
+
+
 ・旅先検索機能
-
-
-
-https://github.com/user-attachments/assets/2014a969-a7a3-4934-93e9-28189d0348e6
 └メインページの旅先検索ボタンからシチュエーション（必須）、年代（必須）、目的（任意）を選択、入力すると
 該当のクチコミが一覧で表示される。
+
+
+https://github.com/user-attachments/assets/1732c983-4128-4dab-81c3-d14dd1e55860
+
+
 
 
 # 実装予定機能
