@@ -21,24 +21,29 @@ raise click
 ・ビュー数やいいね数を気にしない人はそもそもクチコミといった形で長文を考えるのが好きでない人が多いのではないかと考え、必要最低限のクチコミ投稿機能と複数のワードの掛け合わせ検索を可能とすることで、クチコミを書く人を増やしてまだ見ぬ日本を見つけたい。
 
 # 実装した機能についての画像やGIFおよびその説明
-・ユーザー新規登録機能
-https://gyazo.com/bffa52e80aa043bb48a7e90da5d23136
+・ユーザー新規登録機能・ログイン機能
 
 
 https://github.com/user-attachments/assets/f6b8f960-037e-4d46-95e3-26118c4c0f88
 
-
-・ログイン機能
-https://gyazo.com/998618fef20a83bbee931dfa38674bbf
-
 ・ログアウト機能
-https://gyazo.com/c646711331699b511ebbadd2e7348470
+
+
+https://github.com/user-attachments/assets/fdabf5c9-5581-45f6-bb45-262502fdbaf6
+
 
 ・クチコミ投稿機能
-https://gyazo.com/6b62c6af5ca513093707d45aeac91ead
+
+
+https://github.com/user-attachments/assets/e7d432bb-1a83-468a-a9ef-5bd26ff80ab2
+
 
 ・旅先検索機能
-https://gyazo.com/7485ccf6e4419cf6f15f119733e2a791
+
+
+
+https://github.com/user-attachments/assets/2014a969-a7a3-4934-93e9-28189d0348e6
+
 
 
 # 実装予定機能
