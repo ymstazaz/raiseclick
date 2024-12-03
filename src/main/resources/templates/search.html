@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="stylesheet" href="/css/main.css">
+  <meta charset="UTF-8">
+  <title>Search Page</title>
+</head>
+<body>
+<header>
+  <a th:href="@{/main}">RaiseClick</a>
+  <a th:href="@{/reviewForm}">クチコミ投稿</a>
+  <ul>
+    <!-- ログインしている場合 -->
+    <th:block th:if="${#authentication != null and #authentication.principal != 'anonymousUser'}">
+      <li>
+        <a href="#" class="user_name" th:text="${#authentication.principal.username}">User Name</a>
+      </li>
+      <li>
+        <a href="/logout" class="logout" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">ログアウト</a>
+        <form id="logout-form" th:action="@{/logout}" method="post" style="display: none;">
+          <input type="hidden" name="_csrf" th:value="${_csrf.token}">
+        </form>
+      </li>
+    </th:block>
+
+    <!-- ログインしていない場合 -->
+    <th:block th:unless="${#authentication != null and #authentication.principal != 'anonymousUser'}">
+      <li><a href="/loginForm" class="login">ログイン</a></li>
+      <li><a href="/userForm" class="signup">新規登録</a></li>
+    </th:block>
+  </ul>
+</header>
+<!-- 検索フォーム -->
+<form th:action="@{/search}" method="get" class="search-form">
+  <div>
+    <label for="situation">シチュエーション:</label>
+    <input type="text" id="situation" name="situation" placeholder="例: 一人旅">
+  </div>
+  <div>
+    <label for="spotName">訪問先:</label>
+    <input type="text" id="spotName" name="spotName" placeholder="例: 博多">
+  </div>
+  <div>
+    <label for="purposeName">目的:</label>
+    <input type="text" id="purposeName" name="purposeName" placeholder="例: 食">
+  </div>
+  <button type="submit">検索</button>
+</form>
+
+<!-- 検索結果表示 -->
+<section>
+  <h2>検索結果</h2>
+  <ul class="review-list">
+    <li th:each="review : ${reviewList}">
+      <a th:href="@{/review/{id}(id=${review.id})}">
+        <!-- シチュエーション -->
+        <div>
+          <strong>シチュエーション:</strong>
+          <span th:text="${review.situation != null ? review.situation : '情報なし'}">情報なし</span>
+        </div>
+
+        <!-- 訪問先 -->
+        <div>
+          <strong>訪問先:</strong>
+          <span th:if="${review.spot != null}" th:text="${review.spot.spotName}">エリア情報なし</span>
+          <span th:if="${review.spot == null}">エリア情報なし</span>
+        </div>
+
+        <!-- 目的 -->
+        <div>
+          <strong>目的:</strong>
+          <span th:if="${review.reviewPurposes != null && !review.reviewPurposes.isEmpty()}"
+                th:text="${review.reviewPurposes[0].purpose.purposeName}">
+                    目的情報なし
+                </span>
+          <span th:if="${review.reviewPurposes == null || review.reviewPurposes.isEmpty()}">
+                    目的情報なし
+                </span>
+        </div>
+      </a>
+    </li>
+  </ul>
+
+</section>
+</body>
+</html>

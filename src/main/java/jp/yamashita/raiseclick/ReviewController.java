@@ -1,12 +1,12 @@
 package jp.yamashita.raiseclick;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -86,5 +86,27 @@ public class ReviewController {
             throw new Exception("中間テーブル登録に失敗しました: " + e.getMessage(), e);
 
         }
+    }
+
+    @GetMapping("/search")
+    public String searchReviews(
+            @RequestParam(required = false) String situation,
+            @RequestParam(required = false) String spotName,
+            @RequestParam(required = false) String purposeName,
+            Model model
+    ) {
+        // 検索条件を格納
+        SearchCriteria criteria = new SearchCriteria();
+        criteria.setSituation(situation);
+        criteria.setSpotName(spotName);
+        criteria.setPurposeName(purposeName);
+
+        // 検索実行
+        List<Review> reviews = reviewRepository.searchReviews(criteria);
+
+        System.out.println("検索結果のレビューリスト: " + reviews);
+        // 検索実行
+        model.addAttribute("reviewList", reviewRepository.searchReviews(criteria));
+        return "search"; // ビュー名
     }
 }

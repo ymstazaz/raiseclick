@@ -68,6 +68,10 @@ public interface ReviewRepository {
     })
     Purpose __purposeResultMap();
 
+//    検索機能の実装
+    @SelectProvider(type = ReviewSqlProvider.class, method = "buildSearchQuery")
+    List<Review> searchReviews(SearchCriteria criteria);
+
     //保存機能
     @Insert("INSERT INTO review (situation, review_age, review_gender, free_comment, spot_id) VALUES (#{situation}, #{reviewAge}, #{reviewGender}, #{freeComment}, #{spotId})")
     void insert(String situation, String reviewAge, String reviewGender, String freeComment, Long spotId);
