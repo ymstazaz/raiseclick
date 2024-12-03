@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="/css/search.css">
+    <meta charset="UTF-8">
+    <title>Search Page</title>
+</head>
+<body>
+<header>
+    <a th:href="@{/main}">RaiseClick</a>
+    <a th:href="@{/reviewForm}">クチコミ投稿</a>
+</header>
+
+    <main>
+        <form th:action="@{/search}" method="get">
+            <label for="situation">シチュエーション:</label>
+            <select id="situation" name="situation" required>
+                <option value="">選択してください</option>
+                <option value="一人旅">一人旅</option>
+                <option value="恋人旅行">恋人旅行</option>
+                <option value="家族旅行（未就学児）">家族旅行（未就学児）</option>
+                <option value="家族旅行">家族旅行</option>
+                <option value="友達旅行（２〜３名）">友達旅行（２〜３名）</option>
+                <option value="友達グループ旅行">友達グループ旅行</option>
+                <option value="母子旅行">母子旅行</option>
+                <option value="父子旅行">父子旅行</option>
+                <option value="ドライブ">ドライブ</option>
+                <option value="日帰り旅行">日帰り旅行</option>
+                <option value="その他">その他</option>
+            </select>
+
+            <label for="reviewAge">年代:</label>
+            <select id="reviewAge" name="reviewAge" required>
+                <option value="">選択してください</option>
+                <option value="10代">10代</option>
+                <option value="20代">20代</option>
+                <option value="30代">30代</option>
+                <option value="40代">40代</option>
+                <option value="50代">50代</option>
+                <option value="60代以上">60代以上</option>
+            </select>
+
+            <label for="purposeName">目的:</label>
+            <input type="text" id="purposeName" name="purposeName" placeholder="例: 食" />
+
+            <button type="submit">検索</button>
+        </form>
+
+    <section>
+        <h2>検索結果</h2>
+        <ul>
+            <li th:each="review : ${reviewList}">
+                <h3 th:text="'シチュエーション: ' + ${review.situation}"></h3>
+                <p th:text="'年代: ' + ${review.reviewAge}"></p>
+                <p th:text="'目的: ' + ${review.reviewPurposes[0]?.purpose?.purposeName}"></p>
+                <p th:text="'スポット名: ' + ${review.spot?.spotName}"></p>
+                <p th:text="'性別: ' + ${review.reviewGender}"></p>
+                <p th:text="'フリーコメント: ' + ${review.freeComment}"></p>
+            </li>
+        </ul>
+    </section>
+
+    <!-- 検索結果がない場合 -->
+    <p th:if="${#lists.isEmpty(reviewList)}">検索結果が見つかりませんでした。</p>
+</main>
+
+</body>
+</html>

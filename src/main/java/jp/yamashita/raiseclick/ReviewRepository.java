@@ -68,6 +68,43 @@ public interface ReviewRepository {
     })
     Purpose __purposeResultMap();
 
+    //検索機能
+    @Select("""
+           SELECT
+              r.id,
+              r.situation,
+              r.review_age,
+              r.review_gender,
+              r.free_comment,
+              r.created_at,
+              s.id AS spot_id,
+              s.spot_name,
+              rp.id AS review_purpose_id,
+              rp.nth_purpose,
+              rp.satisfaction,
+              p.id AS purpose_id,
+              p.purpose_name
+           FROM
+              review r
+           LEFT JOIN
+              spot s ON s.id = r.spot_id
+           LEFT JOIN
+              review_purpose rp ON rp.review_id = r.id
+           LEFT JOIN
+              purpose p ON p.id = rp.purpose_id
+           WHERE
+              1 = 1
+              AND (#{situation} IS NULL OR r.situation LIKE CONCAT('%', #{situation}, '%'))
+              AND (#{reviewAge} IS NULL OR r.review_age LIKE CONCAT('%', #{reviewAge}, '%'))
+              AND (#{purposeName} IS NULL OR p.purpose_name LIKE CONCAT('%', #{purposeName}, '%'))
+            """)
+    @ResultMap("reviewResultMap")
+    List<Review> searchReviews(
+            @Param("situation") String situation,
+            @Param("reviewAge") String reviewAge,
+            @Param("purposeName") String purposeName
+    );
+
     //保存機能
     @Insert("INSERT INTO review (situation, review_age, review_gender, free_comment, spot_id) VALUES (#{situation}, #{reviewAge}, #{reviewGender}, #{freeComment}, #{spotId})")
     void insert(String situation, String reviewAge, String reviewGender, String freeComment, Long spotId);

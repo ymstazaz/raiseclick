@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -48,6 +49,24 @@ public class ReviewController {
     public String showReviewForm(Model model){
         model.addAttribute("reviewForm",new ReviewForm());
         return "reviewForm";
+    }
+
+    @GetMapping("/search")
+    public String searchReviews(
+            @RequestParam(required = false) String situation,
+            @RequestParam(required = false) String reviewAge,
+            @RequestParam(required = false) String purposeName,
+            Model model
+    ) {
+        // 検索実行
+        List<Review> reviews = reviewRepository.searchReviews(situation, reviewAge, purposeName);
+        System.out.println("シチュエーション: " + situation);
+        System.out.println("年代: " + reviewAge);
+        System.out.println("目的: " + purposeName);
+
+        // 結果をビューに渡す
+        model.addAttribute("reviewList", reviews);
+        return "search"; // ビュー名
     }
 
 
