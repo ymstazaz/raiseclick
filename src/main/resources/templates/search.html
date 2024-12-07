@@ -2,14 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <link rel="stylesheet" href="/css/search.css">
+    <link rel="stylesheet" href="/css/layout.css">
     <meta charset="UTF-8">
     <title>Search Page</title>
 </head>
 <body>
-<header>
-    <a th:href="@{/main}">RaiseClick</a>
-    <a th:href="@{/reviewForm}">クチコミ投稿</a>
-</header>
+<header th:replace="~{layout :: common_header}"></header>
 
 <main>
     <!-- 検索フォーム -->
@@ -78,5 +76,6 @@
     <!-- 検索結果がない場合 -->
     <p th:if="${#lists.isEmpty(reviewList)}">検索結果が見つかりませんでした。</p>
 </main>
+<footer th:replace="~{layout :: common_footer}"></footer>
 </body>
 </html>

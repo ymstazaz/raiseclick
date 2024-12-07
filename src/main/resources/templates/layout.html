@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>部分テンプレート</title>
+</head>
+<body>
+
+<header th:fragment="common_header">
+    <a th:href="@{/main}">RaiseClick</a>
+    <a th:href="@{/reviewForm}">クチコミ投稿</a>
+    <a th:href="@{/search}">旅先検索</a>
+    <ul>
+        <!-- ログインしている場合 -->
+        <th:block th:if="${#authentication != null and #authentication.principal != 'anonymousUser'}">
+            <li>
+                <a href="#" class="user_name" th:text="${#authentication.principal.username}">User Name</a>
+            </li>
+            <li>
+                <a href="/logout" class="logout" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">ログアウト</a>
+                <form id="logout-form" th:action="@{/logout}" method="post" style="display: none;">
+                    <input type="hidden" name="_csrf" th:value="${_csrf.token}">
+                </form>
+            </li>
+        </th:block>
+        <!-- ログインしていない場合 -->
+        <th:block th:unless="${#authentication != null and #authentication.principal != 'anonymousUser'}">
+            <li><a href="/loginForm" class="login">ログイン</a></li>
+            <li><a href="/userForm" class="signup">新規登録</a></li>
+        </th:block>
+    </ul>
+</header>
+
+<footer th:fragment="common_footer">
+    <div class="footer">
+        <a>2024 raise click ~簡単にクチコミ投稿&検索で新しい日本を探す~</a>
+    </div>
+</footer>
+</body>
+</html>

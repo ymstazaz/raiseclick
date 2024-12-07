@@ -9,44 +9,6 @@ body {
     color: #333;
 }
 
-header {
-    background-color: #b52222;
-    color: #fff;
-    padding: 1em;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-header a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 1.2em;
-    margin-right: 20px;
-}
-
-header ul {
-    list-style: none;
-    display: flex;
-    gap: 10px;
-    margin: 0;
-    padding: 0;
-}
-
-header ul li {
-    display: inline;
-}
-
-header .logout {
-    color: #ffcccc;
-}
-
-header .user_name {
-    font-weight: bold;
-}
-
-
-
 /* 検索フォーム全体のデザイン */
 .search-form {
     max-width: 800px;

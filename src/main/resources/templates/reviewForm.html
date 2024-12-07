@@ -2,13 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/layout.css">
     <meta charset="UTF-8">
     <title>クチコミ投稿フォーム</title>
 </head>
 <body>
-<header>
-    <a th:href="@{/main}">RaiseClick</a>
-</header>
+<header th:replace="~{layout :: common_header}"></header>
 
 <div class="page-title">
     <h1>クチコミ投稿フォーム</h1>
@@ -85,7 +84,6 @@
         </div>
     </form>
 </div>
-
-
+<footer th:replace="~{layout :: common_footer}"></footer>
 </body>
 </html>
