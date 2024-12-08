@@ -196,5 +196,8 @@ SpringBoot
 
 ・全体的にビューに独創性を持たせる。
 
+# 勉強用notion
+アプリ専用　https://indigo-recess-495.notion.site/ReiseClick-145b699659b280e99b45d8f83927728c?pvs=4
+
 # 制作時間
 2週間
