@@ -1,6 +1,7 @@
-package jp.yamashita.raiseclick;
+package jp.yamashita.raiseclick.controller;
 
 import jakarta.validation.Valid;
+import jp.yamashita.raiseclick.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +55,7 @@ public class UserController {
         }
 
         try {
-            jp.yamashita.raiseclick.User user = new jp.yamashita.raiseclick.User();
+            User user = new User();
             user.setName(userForm.getName());
             user.setAddress(userForm.getAddress());
             user.setPassword(passwordEncoder.encode(userForm.getPassword())); // パスワードを暗号化

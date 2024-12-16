@@ -1,4 +1,4 @@
-package jp.yamashita.raiseclick;
+package jp.yamashita.raiseclick.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

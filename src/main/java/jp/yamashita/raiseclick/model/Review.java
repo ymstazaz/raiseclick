@@ -1,5 +1,7 @@
-package jp.yamashita.raiseclick;
+package jp.yamashita.raiseclick.model;
 
+import jp.yamashita.raiseclick.model.ReviewPurpose;
+import jp.yamashita.raiseclick.model.Spot;
 import lombok.Data;
 
 import java.time.LocalDateTime;

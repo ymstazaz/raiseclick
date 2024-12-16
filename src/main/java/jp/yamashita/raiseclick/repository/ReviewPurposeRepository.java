@@ -1,4 +1,4 @@
-package jp.yamashita.raiseclick;
+package jp.yamashita.raiseclick.repository;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;

@@ -1,5 +1,7 @@
-package jp.yamashita.raiseclick;
+package jp.yamashita.raiseclick.service;
 
+import jp.yamashita.raiseclick.model.User;
+import jp.yamashita.raiseclick.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

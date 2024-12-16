@@ -1,6 +1,13 @@
-package jp.yamashita.raiseclick;
+package jp.yamashita.raiseclick.controller;
 
 
+import jp.yamashita.raiseclick.form.ReviewForm;
+import jp.yamashita.raiseclick.model.Review;
+import jp.yamashita.raiseclick.repository.ReviewPurposeRepository;
+import jp.yamashita.raiseclick.repository.ReviewRepository;
+import jp.yamashita.raiseclick.repository.SpotRepository;
+import jp.yamashita.raiseclick.service.PurposeService;
+import jp.yamashita.raiseclick.service.SpotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -72,7 +79,7 @@ public class ReviewController {
 
 
     @PostMapping("/reviewForm")
-    public String createReview(@ModelAttribute("reviewForm")ReviewForm reviewForm, Model model){
+    public String createReview(@ModelAttribute("reviewForm") jp.yamashita.raiseclick.ReviewForm reviewForm, Model model){
         try {
             Long spotId = spotService.findOrCreateSpot(reviewForm.getSpotName());
             Long reviewId = insertReview(reviewForm, spotId);

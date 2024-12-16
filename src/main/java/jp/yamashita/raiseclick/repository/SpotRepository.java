@@ -1,5 +1,6 @@
-package jp.yamashita.raiseclick;
+package jp.yamashita.raiseclick.repository;
 
+import jp.yamashita.raiseclick.model.Spot;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;

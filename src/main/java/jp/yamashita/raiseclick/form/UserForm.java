@@ -1,13 +1,17 @@
-package jp.yamashita.raiseclick;
+package jp.yamashita.raiseclick.form;
 
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserForm {
     @NotBlank(message = "名前は必須です")
     private String name;

@@ -1,5 +1,6 @@
-package jp.yamashita.raiseclick;
+package jp.yamashita.raiseclick.controller;
 
+import jp.yamashita.raiseclick.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

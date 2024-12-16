@@ -1,5 +1,6 @@
-package jp.yamashita.raiseclick;
+package jp.yamashita.raiseclick.repository;
 
+import jp.yamashita.raiseclick.model.Review;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;
@@ -50,7 +51,7 @@ public interface ReviewRepository {
             @Result(id = true, property = "id", column = "spot_id"),
             @Result(property = "spotName", column = "spot_name", javaType = String.class),
     })
-    Spot __spotResultMap();
+    jp.yamashita.raiseclick.model.Spot __spotResultMap();
 
     @Select("SELECT '1'") // このクエリは実行されない。@ResultMap を定義するためのダミークエリ
     @Results(id = "reviewPurposeResultMap", value = {
@@ -59,14 +60,14 @@ public interface ReviewRepository {
             @Result(property = "satisfaction", column = "satisfaction"),
             @Result(property = "purpose", one = @One(resultMap = "purposeResultMap")),
     })
-    ReviewPurpose __reviewPurposeResultMap();
+    jp.yamashita.raiseclick.model.ReviewPurpose __reviewPurposeResultMap();
 
     @Select("SELECT '1'") // このクエリは実行されない。@ResultMap を定義するためのダミークエリ
     @Results(id = "purposeResultMap", value = {
             @Result(id = true, property = "id", column = "purpose_id"),
             @Result(property = "purposeName", column = "purpose_name"),
     })
-    Purpose __purposeResultMap();
+    jp.yamashita.raiseclick.model.Purpose __purposeResultMap();
 
     //検索機能
     @Select("""
