@@ -11,7 +11,10 @@
 </div>
 
 <div class="error">
-    <p th:text="${errorMessage}">Error詳細</p>
+    <ul>
+        <li th:each="error : ${validationErrors}" th:text="${error.defaultMessage}"></li>
+    </ul>
 </div>
+　　<a href="/userForm">戻る</a>
 </body>
 </html>

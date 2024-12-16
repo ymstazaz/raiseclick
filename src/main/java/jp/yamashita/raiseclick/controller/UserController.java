@@ -1,11 +1,13 @@
 package jp.yamashita.raiseclick;
 
+import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,12 +17,12 @@ import java.util.List;
 
 @Controller
 public class UserController {
-    private final UserService userService;
+    private final jp.yamashita.raiseclick.UserService userService;
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     private PasswordEncoder passwordEncoder;
-    public UserController(UserService userService) {
+    public UserController(jp.yamashita.raiseclick.UserService userService) {
         this.userService = userService;
     }
 
@@ -40,14 +42,19 @@ public class UserController {
                 "鹿児島県", "沖縄県"
     );
         model.addAttribute("prefectures", prefectures);
-        model.addAttribute("userForm", new UserForm());
+        model.addAttribute("userForm", new jp.yamashita.raiseclick.UserForm());
         return "userForm";
     }
 
     @PostMapping("signup")
-    public String signup(@ModelAttribute UserForm userForm,Model model){
+    public String signup(@Valid @ModelAttribute jp.yamashita.raiseclick.UserForm userForm, BindingResult result, Model model){
+        if (result.hasErrors()) {
+            model.addAttribute("validationErrors", result.getAllErrors());
+            return "error"; // エラーメッセージを表示するページに遷移
+        }
+
         try {
-            User user = new User();
+            jp.yamashita.raiseclick.User user = new jp.yamashita.raiseclick.User();
             user.setName(userForm.getName());
             user.setAddress(userForm.getAddress());
             user.setPassword(passwordEncoder.encode(userForm.getPassword())); // パスワードを暗号化
