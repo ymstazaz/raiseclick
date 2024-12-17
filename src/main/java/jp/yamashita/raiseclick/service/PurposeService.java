@@ -1,5 +1,7 @@
-package jp.yamashita.raiseclick;
+package jp.yamashita.raiseclick.service;
 
+import jp.yamashita.raiseclick.model.Purpose;
+import jp.yamashita.raiseclick.repository.PurposeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

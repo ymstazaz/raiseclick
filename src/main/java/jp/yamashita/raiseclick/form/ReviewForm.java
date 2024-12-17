@@ -1,4 +1,4 @@
-package jp.yamashita.raiseclick;
+package jp.yamashita.raiseclick.form;
 
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;

@@ -1,4 +1,4 @@
-package jp.yamashita.raiseclick;
+package jp.yamashita.raiseclick.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
