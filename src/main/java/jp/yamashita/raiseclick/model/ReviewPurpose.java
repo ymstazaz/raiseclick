@@ -1,6 +1,5 @@
 package jp.yamashita.raiseclick.model;
 
-import jp.yamashita.raiseclick.model.Purpose;
 import lombok.Data;
 
 @Data

@@ -79,7 +79,7 @@ public class ReviewController {
 
 
     @PostMapping("/reviewForm")
-    public String createReview(@ModelAttribute("reviewForm") jp.yamashita.raiseclick.ReviewForm reviewForm, Model model){
+    public String createReview(@ModelAttribute("reviewForm") ReviewForm reviewForm, Model model){
         try {
             Long spotId = spotService.findOrCreateSpot(reviewForm.getSpotName());
             Long reviewId = insertReview(reviewForm, spotId);
