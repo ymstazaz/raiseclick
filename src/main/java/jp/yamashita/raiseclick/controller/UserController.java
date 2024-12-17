@@ -1,7 +1,9 @@
 package jp.yamashita.raiseclick.controller;
 
 import jakarta.validation.Valid;
+import jp.yamashita.raiseclick.form.UserForm;
 import jp.yamashita.raiseclick.model.User;
+import jp.yamashita.raiseclick.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +20,12 @@ import java.util.List;
 
 @Controller
 public class UserController {
-    private final jp.yamashita.raiseclick.UserService userService;
+    private final UserService userService;
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     private PasswordEncoder passwordEncoder;
-    public UserController(jp.yamashita.raiseclick.UserService userService) {
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 
@@ -43,12 +45,12 @@ public class UserController {
                 "鹿児島県", "沖縄県"
     );
         model.addAttribute("prefectures", prefectures);
-        model.addAttribute("userForm", new jp.yamashita.raiseclick.UserForm());
+        model.addAttribute("userForm", new UserForm());
         return "userForm";
     }
 
     @PostMapping("signup")
-    public String signup(@Valid @ModelAttribute jp.yamashita.raiseclick.UserForm userForm, BindingResult result, Model model){
+    public String signup(@Valid @ModelAttribute UserForm userForm, BindingResult result, Model model){
         if (result.hasErrors()) {
             model.addAttribute("validationErrors", result.getAllErrors());
             return "error"; // エラーメッセージを表示するページに遷移
