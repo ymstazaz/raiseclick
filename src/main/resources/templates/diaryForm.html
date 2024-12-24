@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/layout.css">
+    <meta charset="UTF-8">
+    <title>旅行記投稿フォーム</title>
+</head>
+<body>
+<header th:replace="~{layout :: common_header}"></header>
+<div class="page-title">
+    <h1>旅行記投稿フォーム</h1>
+</div>
+
+<div class="form">
+    <form th:action="@{/diaryForm}" th:method="post" th:object="${diaryForm}">
+        <div class="transportation">
+            <label for="transportation">移動手段を選択してください</label>
+            <select id="transportation" th:field="*{transportation}" required>
+                <option value="">選択してください</option>
+                <option value="自家用車">自家用車</option>
+                <option value="公共交通機関">公共交通機関</option>
+                <option value="公共交通機関＋レンタカー">公共交通機関＋レンタカー</option>
+                <option value="レンタカー">レンタカー</option>
+            </select>
+        </div>
+        <div class="cost">
+            <label for="cost">1人あたりの宿泊費用を教えてください（任意）</label>
+            <input type="text" th:field="*{cost}" id="cost" placeholder="10000">
+        </div>
+        <div class="full_cost">
+            <label for="fullCost">1人あたりの旅行費用の総額を教えてください（任意）</label>
+            <input type="text" th:field="*{fullCost}" id="fullCost" placeholder="30000">
+        </div>
+        <div class="submit">
+            <button type="submit">投稿</button>
+        </div>
+    </form>
+</div>
+<footer th:replace="~{layout :: common_footer}"></footer>
+</body>
+</html>

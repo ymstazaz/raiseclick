@@ -44,3 +44,15 @@ CREATE TABLE IF NOT EXISTS review_purpose(
  FOREIGN KEY (purpose_id) REFERENCES purpose(id) ON DELETE CASCADE
  );
 
+ CREATE TABLE IF NOT EXISTS diary(
+ id             BIGINT AUTO_INCREMENT PRIMARY KEY,
+ review_id      BIGINT NOT NULL,
+ users_id       BIGINT NOT NULL,
+ Transportation VARCHAR(50) NOT NULL,
+ cost           INT,
+ full_cost      INT,
+ frequency      INT NOT NULL,
+ FOREIGN KEY (review_id) REFERENCES review(id) ON DELETE CASCADE,
+ FOREIGN KEY (users_id) REFERENCES users(id) ON DELETE CASCADE
+ );
+
