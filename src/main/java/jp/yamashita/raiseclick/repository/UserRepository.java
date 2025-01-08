@@ -10,7 +10,7 @@ public interface UserRepository{
     @Insert("insert into users (name,address,password,prefecture,city,gender,age) values (#{name},#{address},#{password},#{prefecture},#{city},#{gender},#{age})")
     void insert(User user);
 
-    @Select("SELECT name,address,password,role FROM users where address = #{address}")
+    @Select("SELECT id,name,address,password,role FROM users where address = #{address}")
     User findByAddress(String address);
     @Select("SELECT name,address FROM users where id = #{id}")
     User findById(Long Id);
