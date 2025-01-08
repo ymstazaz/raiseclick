@@ -14,6 +14,69 @@
 
 <div class="form">
     <form th:action="@{/diaryForm}" th:method="post" th:object="${diaryForm}">
+        <div class="spot_name">
+            <label for="spotName">訪問先を記入してください</label>
+            <input type="text" th:field="*{spotName}" id="spotName" required placeholder="例：ディズニーランド・高山">
+        </div>
+        <div class="situation">
+            <label for="situation">今回の旅行はどんな旅行ですか？</label>
+            <select id="situation" th:field="*{situation}" required>
+                <option value="">選択してください</option>
+                <option value="一人旅">一人旅</option>
+                <option value="恋人旅行">恋人旅行</option>
+                <option value="家族旅行（未就学児）">家族旅行（未就学児）</option>
+                <option value="家族旅行">家族旅行</option>
+                <option value="友達旅行（２〜３名）">友達旅行（２〜３名）</option>
+                <option value="友達グループ旅行">友達グループ旅行</option>
+                <option value="母子旅行">母子旅行</option>
+                <option value="父子旅行">父子旅行</option>
+                <option value="ドライブ">ドライブ</option>
+                <option value="日帰り旅行">日帰り旅行</option>
+                <option value="その他">その他</option>
+            </select>
+        </div>
+        <div class="review_age">
+            <label for="reviewAge">年齢を選択してください</label>
+            <select id="reviewAge" th:field="*{reviewAge}" required>
+                <option value="">選択してください</option>
+                <option value="10代">10代</option>
+                <option value="20代">20代</option>
+                <option value="30代">30代</option>
+                <option value="40代">40代</option>
+                <option value="50代">50代</option>
+                <option value="60代以上">60代以上</option>
+            </select>
+        </div>
+        <div class="review_gender">
+            <label for="reviewGender">性別を選んでください</label>
+            <select id="reviewGender" th:field="*{reviewGender}" required>
+                <option value="">選択してください</option>
+                <option value="男">男</option>
+                <option value="女">女</option>
+                <option value="秘密">秘密</option>
+            </select>
+        </div>
+        <div class="purpose">
+            <div class="purpose_name">
+                <label for="purposeName">１番の目的を記入してください</label>
+                <input type="text" th:field="*{purposeName}" id="purposeName" required placeholder="例：温泉・食（牡蠣）・景観・アクティビティ等" >
+            </div>
+            <div class="satisfaction">
+                <label for="satisfaction">目的に対する満足度を選んでください（５点満点）（任意）</label>
+                <select id="satisfaction" th:field="*{satisfaction}">
+                    <option value="">選択してください</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+        </div>
+        <div class="free_comment">
+            <label for="freeComment">追加コメントなどあればください(任意)</label>
+            <input type="text" th:field="*{freeComment}" id="freeComment" placeholder="自由記載">
+        </div>
         <div class="transportation">
             <label for="transportation">移動手段を選択してください</label>
             <select id="transportation" th:field="*{transportation}" required>

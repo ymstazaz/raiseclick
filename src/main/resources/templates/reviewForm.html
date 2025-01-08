@@ -8,7 +8,6 @@
 </head>
 <body>
 <header th:replace="~{layout :: common_header}"></header>
-
 <div class="page-title">
     <h1>クチコミ投稿フォーム</h1>
 </div>
@@ -74,7 +73,6 @@
                 </select>
             </div>
         </div>
-
         <div class="free_comment">
             <label for="freeComment">追加コメントなどあればください(任意)</label>
             <input type="text" th:field="*{freeComment}" id="freeComment" placeholder="自由記載">

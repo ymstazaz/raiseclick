@@ -1,6 +1,7 @@
 package jp.yamashita.raiseclick.controller;
 
 import jp.yamashita.raiseclick.form.DiaryForm;
+import jp.yamashita.raiseclick.repository.DiaryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +14,7 @@ public class DiaryController {
     private final DiaryRepository diaryRepository;
 
     @Autowired
-    public DiaryController(DiaryController diaryController){
+    public DiaryController(DiaryRepository diaryRepository){
         this.diaryRepository = diaryRepository;
     }
 
@@ -45,7 +46,7 @@ public class DiaryController {
             );
             return diaryRepository.findLatestId();
         }catch (Exception e){
-            throw new Exception("レビュー登録に失敗しました: " + e.getMessage(), e);
+            throw new Exception("旅行記登録に失敗しました: " + e.getMessage(), e);
         }
     }
 }
